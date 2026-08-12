@@ -63,9 +63,9 @@
   function patternFor(game) {
     let seed = [...game.n].reduce((sum,c) => sum + c.charCodeAt(0), 0);
     return [
-      `Mulai bertahap · ${18 + seed % 13}x spin normal`,
-      `Ulangi dari awal · ${32 + seed % 17}x spin turbo`,
-      `Jeda singkat · ${40 + seed % 19}x spin cepat`
+      {label:"Sesuaikan nilai",spin:`${18 + seed % 17}x Spin Turbo`},
+      {label:"Ulangi dari awal",spin:`${32 + seed % 19}x Spin Cepat`},
+      {label:"Mulai bertahap",spin:`${16 + seed % 13}x Spin Manual`}
     ];
   }
 
@@ -73,8 +73,9 @@
     const game = data.games[index]; if (!game) return;
     $("#modal-image").src = `${imageBase}games/${game.i}`; $("#modal-image").alt = game.n;
     $("#modal-provider").textContent = game.p; $("#modal-title").textContent = game.n;
+    $("#modal-chip-rtp").textContent = `${game.r.toFixed(1)}%`;
     $("#modal-rtp").textContent = `${game.r.toFixed(1)}%`; $("#modal-meter").style.width = `${game.r}%`;
-    $("#modal-pattern").innerHTML = patternFor(game).map((text,i) => `<li><span>${i+1}</span>${escapeHTML(text)}</li>`).join("");
+    $("#modal-pattern").innerHTML = patternFor(game).map(item => `<li><strong>${escapeHTML(item.label)}</strong><span>${escapeHTML(item.spin)}</span></li>`).join("");
     els.modal.showModal(); document.body.classList.add("modal-open");
   }
   function closeModal() { if (els.modal.open) els.modal.close(); document.body.classList.remove("modal-open"); }
@@ -93,7 +94,7 @@
   els.sort.addEventListener("change", e => { state.sort=e.target.value; state.limit=15; renderGames(); });
   els.load.addEventListener("click",()=>{state.limit+=15;renderGames()}); els.reset.addEventListener("click",resetAll); els.emptyReset.addEventListener("click",resetAll);
   els.grid.addEventListener("click",e=>{const btn=e.target.closest("[data-open-game]");if(btn)openModal(Number(btn.dataset.openGame))});
-  $("#modal-close").addEventListener("click",closeModal); $("#modal-done").addEventListener("click",closeModal); els.modal.addEventListener("click",e=>{if(e.target===els.modal)closeModal()});
+  $("#modal-close").addEventListener("click",closeModal); els.modal.addEventListener("click",e=>{if(e.target===els.modal)closeModal()});
   document.addEventListener("keydown",e=>{if(e.key==="/"&&!/input|select|textarea/i.test(document.activeElement.tagName)){e.preventDefault();els.search.focus()}if(e.key==="Escape")closeModal()});
   $(".provider-prev").addEventListener("click",()=>els.providers.scrollBy({left:-360,behavior:"smooth"})); $(".provider-next").addEventListener("click",()=>els.providers.scrollBy({left:360,behavior:"smooth"}));
   window.addEventListener("scroll",()=>els.backTop.classList.toggle("is-visible",scrollY>600),{passive:true}); els.backTop.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
