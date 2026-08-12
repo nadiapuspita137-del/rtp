@@ -9,9 +9,9 @@
   <title>BOLAPELANGI2 — Katalog & Informasi RTP Game</title>
   <link rel="icon" href="https://rtpbp2.bopel.space/images/site/bolapelangi2-favicon-f1f465c7da2c00f68850.webp">
   <link rel="preconnect" href="https://rtpbp2.bopel.space" crossorigin>
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="data.js"></script>
-  <script defer src="app.js"></script>
+  <link rel="stylesheet" href="styles.css?v=20260812-5">
+  <script defer src="data.js?v=20260812-5"></script>
+  <script defer src="app.js?v=20260812-5"></script>
 </head>
 <body>
   <a class="skip-link" href="#games">Lewati ke daftar game</a>
@@ -34,6 +34,7 @@
   </header>
 
   <div class="notice-bar" role="status">
+    <button class="sound-toggle" id="sound-toggle" type="button" aria-label="Aktifkan suara notifikasi" aria-pressed="false">🔊</button>
     <div class="notice-track">
       <span>◆ CEK UPDATE KATALOG GAME HARI INI</span>
       <span>◆ AKSES HANYA MELALUI TAUTAN RESMI BOLAPELANGI2</span>
@@ -44,6 +45,11 @@
 
   <main id="top">
     <section class="hero shell" aria-labelledby="hero-title">
+      <aside class="wd-toast" id="wd-toast" aria-live="polite" aria-label="Simulasi aktivitas withdraw member">
+        <div class="wd-icon">✓</div>
+        <div><strong>WITHDRAW MEMBER</strong><p><span id="wd-member">ID: And***</span> · WD <b id="wd-amount">Rp1.500.000</b> berhasil</p><small>Simulasi aktivitas</small></div>
+        <button id="wd-close" type="button" aria-label="Tutup notifikasi withdraw">×</button>
+      </aside>
       <div class="hero-heading">
         <div>
           <p class="eyebrow"><span class="status-dot"></span> Katalog diperbarui berkala</p>
@@ -98,7 +104,11 @@
         <div class="section-label"><h3>Provider Game</h3><span>Geser untuk melihat lainnya</span></div>
         <div class="provider-wrap">
           <button class="provider-arrow provider-prev" type="button" aria-label="Geser provider ke kiri">‹</button>
-          <div class="provider-list" id="provider-list" role="toolbar" aria-label="Filter provider"></div>
+          <div class="provider-list" id="provider-list" role="toolbar" aria-label="Filter provider">
+            <button class="provider-chip is-active" type="button" aria-pressed="true"><span class="chip-icon">▦</span><span>Slot Favorite</span></button>
+            <button class="provider-chip" type="button"><img src="https://rtpbp2.bopel.space/images/providers/pra.webp" alt=""><span>Pragmatic Play</span></button>
+            <button class="provider-chip" type="button"><img src="https://rtpbp2.bopel.space/images/providers/pgs.webp" alt=""><span>PG Soft</span></button>
+          </div>
           <button class="provider-arrow provider-next" type="button" aria-label="Geser provider ke kanan">›</button>
         </div>
       </div>
@@ -111,7 +121,14 @@
         <button id="reset-filter" class="text-button" type="button" hidden>Reset filter</button>
       </div>
 
-      <div class="game-grid" id="game-grid" aria-live="polite"></div>
+      <div class="app-status" id="app-status" role="status">Memuat katalog interaktif…</div>
+      <div class="game-grid" id="game-grid" aria-live="polite">
+        <article class="game-card fallback-card"><div class="game-image"><img src="https://rtpbp2.bopel.space/images/games/43a6f29a2397af05.webp" alt="Mpoplay Gates Of Olympus"></div><div class="game-body"><h3 class="game-title">Mpoplay Gates Of Olympus</h3><p class="game-provider">Pragmatic Play</p><div class="rtp-row"><span>Indikator RTP</span><strong>86.6%</strong></div><div class="meter"><i style="width:86.6%"></i></div><button class="pattern-button" type="button" disabled>▦ &nbsp; POLA MAIN</button></div></article>
+        <article class="game-card fallback-card"><div class="game-image"><img src="https://rtpbp2.bopel.space/images/games/38246b6b21a9a926.webp" alt="Mpoplay Sweet Bonanza"></div><div class="game-body"><h3 class="game-title">Mpoplay Sweet Bonanza</h3><p class="game-provider">Pragmatic Play</p><div class="rtp-row"><span>Indikator RTP</span><strong>95.7%</strong></div><div class="meter"><i style="width:95.7%"></i></div><button class="pattern-button" type="button" disabled>▦ &nbsp; POLA MAIN</button></div></article>
+        <article class="game-card fallback-card"><div class="game-image"><img src="https://rtpbp2.bopel.space/images/games/515decda9e4e554f.webp" alt="Sugar Rush"></div><div class="game-body"><h3 class="game-title">Sugar Rush</h3><p class="game-provider">Pragmatic Play</p><div class="rtp-row"><span>Indikator RTP</span><strong>93.0%</strong></div><div class="meter"><i style="width:93%"></i></div><button class="pattern-button" type="button" disabled>▦ &nbsp; POLA MAIN</button></div></article>
+        <article class="game-card fallback-card"><div class="game-image"><img src="https://rtpbp2.bopel.space/images/games/cfe93dadbddf9379.webp" alt="Gates Of Olympus 1000"></div><div class="game-body"><h3 class="game-title">Gates Of Olympus 1000</h3><p class="game-provider">Pragmatic Play</p><div class="rtp-row"><span>Indikator RTP</span><strong>94.5%</strong></div><div class="meter"><i style="width:94.5%"></i></div><button class="pattern-button" type="button" disabled>▦ &nbsp; POLA MAIN</button></div></article>
+        <article class="game-card fallback-card"><div class="game-image"><img src="https://rtpbp2.bopel.space/images/games/85c5c869f546b50f.webp" alt="Lucky Neko"></div><div class="game-body"><h3 class="game-title">Lucky Neko</h3><p class="game-provider">PG Soft</p><div class="rtp-row"><span>Indikator RTP</span><strong>89.0%</strong></div><div class="meter"><i style="width:89%"></i></div><button class="pattern-button" type="button" disabled>▦ &nbsp; POLA MAIN</button></div></article>
+      </div>
       <div class="empty-state" id="empty-state" hidden>
         <span>⌕</span>
         <h3>Game tidak ditemukan</h3>
@@ -178,6 +195,7 @@
   </dialog>
 
   <button class="back-top" id="back-top" type="button" aria-label="Kembali ke atas">↑</button>
+  <a class="floating-access" href="https://shortq.net/bolapelangi2" aria-label="Akses resmi BOLAPELANGI2">→</a>
   <noscript><div class="noscript">Aktifkan JavaScript untuk menggunakan pencarian dan filter katalog.</div></noscript>
 </body>
 </html>

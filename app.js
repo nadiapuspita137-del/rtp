@@ -1,6 +1,11 @@
 (() => {
   "use strict";
   const data = window.RTP_DATA;
+  const statusEl = document.querySelector("#app-status");
+  if (!data || !Array.isArray(data.games) || !Array.isArray(data.providers)) {
+    if (statusEl) statusEl.textContent = "Katalog dasar tetap tersedia. Muat ulang halaman untuk mengaktifkan filter.";
+    return;
+  }
   const $ = (s, root = document) => root.querySelector(s);
   const els = {
     grid: $("#game-grid"), providers: $("#provider-list"), search: $("#search-input"),
@@ -53,6 +58,7 @@
     els.load.hidden = games.length === 0 || visible.length >= games.length;
     els.load.textContent = `+ TAMPILKAN LEBIH BANYAK (${Math.max(0, games.length - visible.length)} tersisa)`;
     els.reset.hidden = state.provider === "all" && !state.query && state.sort === "featured";
+    if (statusEl) statusEl.hidden = true;
   }
 
   function resetAll() {
@@ -89,6 +95,20 @@
     let timer=setInterval(()=>show(state.slide+1),6500); $(".carousel").addEventListener("mouseenter",()=>clearInterval(timer),{once:true});
   }
 
+  function setupWithdrawToast() {
+    const toast=$("#wd-toast"), member=$("#wd-member"), amount=$("#wd-amount"), close=$("#wd-close");
+    if(!toast||!member||!amount)return;
+    const entries=[["ID: And***","Rp1.500.000"],["ID: Jis***","Rp2.000.000"],["ID: Riz***","Rp850.000"],["ID: Dew***","Rp3.250.000"]];
+    let index=0, timer;
+    const show=()=>{const row=entries[index++%entries.length];member.textContent=row[0];amount.textContent=row[1];toast.classList.add("is-visible");clearTimeout(timer);timer=setTimeout(()=>toast.classList.remove("is-visible"),5500)};
+    setTimeout(show,1600);setInterval(show,11000);close?.addEventListener("click",()=>{toast.classList.remove("is-visible");clearTimeout(timer)});
+  }
+
+  function setupSoundToggle(){
+    const button=$("#sound-toggle");if(!button)return;
+    button.addEventListener("click",()=>{const active=button.getAttribute("aria-pressed")!=="true";button.setAttribute("aria-pressed",String(active));button.textContent=active?"🔈":"🔊";button.setAttribute("aria-label",active?"Matikan suara notifikasi":"Aktifkan suara notifikasi")});
+  }
+
   els.providers.addEventListener("click", e => { const btn=e.target.closest("[data-provider]"); if(!btn)return; state.provider=btn.dataset.provider; state.limit=15; renderProviders(); renderGames(); $("#games").scrollIntoView({behavior:"smooth",block:"start"}); });
   els.search.addEventListener("input", e => { state.query=e.target.value; state.limit=15; renderGames(); });
   els.sort.addEventListener("change", e => { state.sort=e.target.value; state.limit=15; renderGames(); });
@@ -99,5 +119,5 @@
   $(".provider-prev").addEventListener("click",()=>els.providers.scrollBy({left:-360,behavior:"smooth"})); $(".provider-next").addEventListener("click",()=>els.providers.scrollBy({left:360,behavior:"smooth"}));
   window.addEventListener("scroll",()=>els.backTop.classList.toggle("is-visible",scrollY>600),{passive:true}); els.backTop.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
   $("#game-total").textContent=data.games.length.toLocaleString("id-ID"); $("#provider-total").textContent=(data.providers.length-1).toLocaleString("id-ID");
-  renderProviders(); renderGames(); setupCarousel();
+  renderProviders(); renderGames(); setupCarousel(); setupWithdrawToast(); setupSoundToggle();
 })();

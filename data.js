@@ -1,7 +1,7 @@
 window.RTP_DATA = {
   accessUrl: "https://shortq.net/bolapelangi2",
   providers: [
-    { id: "all", name: "Semua Game", icon: "▦" },
+    { id: "all", name: "Slot Favorite", icon: "▦" },
     { id: "Pragmatic Play", name: "Pragmatic Play", logo: "pra.webp" },
     { id: "PG Soft", name: "PG Soft", logo: "pgs.webp" },
     { id: "Habanero", name: "Habanero", logo: "hbn.webp" },
