@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#04170f">
+  <meta name="description" content="Katalog game dan indikator RTP BOLAPELANGI2 dengan pencarian cepat, filter provider, dan tampilan responsif.">
+  <meta name="robots" content="index,follow">
+  <title>BOLAPELANGI2 — Katalog & Informasi RTP Game</title>
+  <link rel="icon" href="https://rtpbp2.bopel.space/images/site/bolapelangi2-favicon-f1f465c7da2c00f68850.webp">
+  <link rel="preconnect" href="https://rtpbp2.bopel.space" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="data.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#games">Lewati ke daftar game</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="Beranda BOLAPELANGI2">
+        <img src="https://rtpbp2.bopel.space/images/logo-bp2.webp" alt="BOLAPELANGI2" width="190" height="56">
+      </a>
+      <nav class="desktop-nav" aria-label="Navigasi utama">
+        <a href="#providers">Provider</a>
+        <a href="#games">Game</a>
+        <a href="#guide">Panduan</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-ghost" href="https://shortq.net/bolapelangi2" rel="nofollow">Masuk</a>
+        <a class="btn btn-gold" href="https://shortq.net/bolapelangi2" rel="nofollow">Daftar</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="notice-bar" role="status">
+    <div class="notice-track">
+      <span>◆ CEK UPDATE KATALOG GAME HARI INI</span>
+      <span>◆ AKSES HANYA MELALUI TAUTAN RESMI BOLAPELANGI2</span>
+      <span>◆ INDIKATOR PADA HALAMAN BERSIFAT REFERENSI TAMPILAN</span>
+      <span aria-hidden="true">◆ CEK UPDATE KATALOG GAME HARI INI</span>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-heading">
+        <div>
+          <p class="eyebrow"><span class="status-dot"></span> Katalog diperbarui berkala</p>
+          <h1 id="hero-title">RTP SLOT <span>BOLAPELANGI2</span></h1>
+        </div>
+        <div class="hero-stats" aria-label="Ringkasan katalog">
+          <div><strong id="game-total">0</strong><span>Game</span></div>
+          <div><strong id="provider-total">0</strong><span>Provider</span></div>
+        </div>
+      </div>
+
+      <div class="carousel" aria-label="Banner informasi BOLAPELANGI2">
+        <div class="slides" id="slides">
+          <article class="slide is-active"><img src="https://rtpbp2.bopel.space/images/banner-1.webp" alt="RTP Slot BOLAPELANGI2"></article>
+          <article class="slide"><img src="https://rtpbp2.bopel.space/images/banner-2.webp" alt="Top Up QRIS BOLAPELANGI2" loading="lazy"></article>
+          <article class="slide"><img src="https://rtpbp2.bopel.space/images/banner-3.webp" alt="Selamat Datang di BOLAPELANGI2" loading="lazy"></article>
+          <article class="slide"><img src="https://rtpbp2.bopel.space/images/banner-4.webp" alt="Pilihan Game BOLAPELANGI2" loading="lazy"></article>
+        </div>
+        <button class="carousel-arrow prev" type="button" aria-label="Banner sebelumnya">‹</button>
+        <button class="carousel-arrow next" type="button" aria-label="Banner berikutnya">›</button>
+        <div class="carousel-dots" aria-label="Pilih banner"></div>
+      </div>
+    </section>
+
+    <section class="catalog shell" aria-labelledby="catalog-title">
+      <div class="catalog-top">
+        <div>
+          <p class="eyebrow">Jelajahi katalog</p>
+          <h2 id="catalog-title">Temukan Game Lebih Cepat</h2>
+        </div>
+        <p class="catalog-note">Gunakan pencarian, provider, atau urutkan indikator.</p>
+      </div>
+
+      <div class="search-panel">
+        <label class="search-box" for="search-input">
+          <span aria-hidden="true">⌕</span>
+          <input id="search-input" type="search" autocomplete="off" placeholder="Cari nama game atau provider...">
+          <kbd>/</kbd>
+        </label>
+        <label class="sort-box" for="sort-select">
+          <span>Urutkan</span>
+          <select id="sort-select">
+            <option value="featured">Pilihan utama</option>
+            <option value="rtp-desc">RTP tertinggi</option>
+            <option value="rtp-asc">RTP terendah</option>
+            <option value="name">Nama A–Z</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="providers" class="providers-section">
+        <div class="section-label"><h3>Provider Game</h3><span>Geser untuk melihat lainnya</span></div>
+        <div class="provider-wrap">
+          <button class="provider-arrow provider-prev" type="button" aria-label="Geser provider ke kiri">‹</button>
+          <div class="provider-list" id="provider-list" role="toolbar" aria-label="Filter provider"></div>
+          <button class="provider-arrow provider-next" type="button" aria-label="Geser provider ke kanan">›</button>
+        </div>
+      </div>
+
+      <div id="games" class="games-head">
+        <div>
+          <h3>Daftar Game</h3>
+          <p id="result-summary" aria-live="polite">Menyiapkan katalog...</p>
+        </div>
+        <button id="reset-filter" class="text-button" type="button" hidden>Reset filter</button>
+      </div>
+
+      <div class="game-grid" id="game-grid" aria-live="polite"></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <span>⌕</span>
+        <h3>Game tidak ditemukan</h3>
+        <p>Coba kata kunci lain atau pilih semua provider.</p>
+        <button class="btn btn-gold" type="button" id="empty-reset">Reset pencarian</button>
+      </div>
+      <button class="load-more" id="load-more" type="button">+ TAMPILKAN LEBIH BANYAK</button>
+    </section>
+
+    <section id="guide" class="guide shell" aria-labelledby="guide-title">
+      <div class="guide-intro">
+        <p class="eyebrow">Informasi penting</p>
+        <h2 id="guide-title">Panduan Membaca Informasi RTP Game</h2>
+        <p>Halaman ini membantu pengunjung menelusuri katalog. Angka pada kartu bukan prediksi hasil dan bukan data langsung dari server provider.</p>
+      </div>
+      <div class="guide-grid">
+        <article><span>↗</span><h3>Apa itu RTP?</h3><p>Persentase teoretis dalam rangkaian permainan sangat panjang, bukan penentu satu putaran.</p></article>
+        <article><span>⌕</span><h3>Cari dengan cepat</h3><p>Ketik nama game atau provider, lalu kombinasikan dengan filter dan pengurutan.</p></article>
+        <article><span>↻</span><h3>Pembaruan indikator</h3><p>Nilai dibuat sebagai indikator antarmuka dan diperbarui berkala pada halaman.</p></article>
+        <article><span>◇</span><h3>Gunakan secara bijak</h3><p>Tetapkan batas waktu dan anggaran. Layanan ditujukan hanya untuk pengguna 18+.</p></article>
+      </div>
+      <div class="disclaimer"><strong>Catatan:</strong> indikator dan panduan pola tidak menjamin kemenangan serta tidak dapat memastikan hasil putaran berikutnya.</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-grid">
+      <div><strong class="footer-brand">BOLAPELANGI2</strong><p>Katalog game dan informasi indikator dalam satu halaman yang cepat dan responsif.</p></div>
+      <nav aria-label="Navigasi footer"><a href="#providers">Provider</a><a href="#games">Daftar Game</a><a href="#guide">Panduan</a><a href="https://bolapelangi2.org/">Situs Utama</a></nav>
+    </div>
+    <div class="shell footer-bottom"><span>© 2026 BOLAPELANGI2</span><span>18+ · Bermain dengan bertanggung jawab</span></div>
+  </footer>
+
+  <nav class="mobile-nav" aria-label="Navigasi mobile">
+    <a href="#top"><span>⌂</span>Beranda</a><a href="#providers"><span>▦</span>Provider</a><a href="#games"><span>⌕</span>Cari</a><a href="https://shortq.net/bolapelangi2"><span>→</span>Masuk</a>
+  </nav>
+
+  <dialog class="game-modal" id="game-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Tutup detail game">×</button>
+      <div class="modal-visual"><img id="modal-image" alt=""></div>
+      <div class="modal-content">
+        <p class="eyebrow" id="modal-provider"></p>
+        <h2 id="modal-title"></h2>
+        <div class="modal-rtp"><span>Indikator halaman</span><strong id="modal-rtp"></strong></div>
+        <div class="modal-meter"><i id="modal-meter"></i></div>
+        <section class="pattern-box">
+          <h3>Panduan Pola Main</h3>
+          <p>Panduan ini merupakan indikator tampilan dan bukan jaminan hasil.</p>
+          <ol id="modal-pattern"></ol>
+        </section>
+        <div class="modal-actions"><a class="btn btn-gold" href="https://shortq.net/bolapelangi2">Main di BOLAPELANGI2</a><button class="btn btn-ghost" id="modal-done" type="button">Tutup</button></div>
+      </div>
+    </div>
+  </dialog>
+
+  <button class="back-top" id="back-top" type="button" aria-label="Kembali ke atas">↑</button>
+  <noscript><div class="noscript">Aktifkan JavaScript untuk menggunakan pencarian dan filter katalog.</div></noscript>
+</body>
+</html>
