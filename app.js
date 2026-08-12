@@ -1,3 +1,4 @@
+window.addEventListener("rtp:data-ready", () => {
 (() => {
   "use strict";
   const data = window.RTP_DATA;
@@ -22,7 +23,7 @@
     els.providers.innerHTML = data.providers.map(item => {
       const visual = item.logo
         ? `<img src="${imageBase}providers/${item.logo}" alt="" width="32" height="32" loading="lazy">`
-        : `<span class="chip-icon" aria-hidden="true">${item.icon}</span>`;
+        : `<span class="chip-icon" aria-hidden="true">${item.icon || "▦"}</span>`;
       return `<button class="provider-chip${item.id === state.provider ? " is-active" : ""}" type="button" data-provider="${escapeHTML(item.id)}" aria-pressed="${item.id === state.provider}">${visual}<span>${escapeHTML(item.name)}</span></button>`;
     }).join("");
   }
@@ -121,3 +122,4 @@
   $("#game-total").textContent=data.games.length.toLocaleString("id-ID"); $("#provider-total").textContent=(data.providers.length-1).toLocaleString("id-ID");
   renderProviders(); renderGames(); setupCarousel(); setupWithdrawToast(); setupSoundToggle();
 })();
+});
