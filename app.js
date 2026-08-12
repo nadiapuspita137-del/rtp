@@ -13,7 +13,7 @@
     empty: $("#empty-state"), reset: $("#reset-filter"), emptyReset: $("#empty-reset"),
     modal: $("#game-modal"), backTop: $("#back-top")
   };
-  const state = { provider: "all", query: "", sort: "featured", limit: 15, slide: 0 };
+  const state = { provider: "all", query: "", sort: "featured", limit: 30, slide: 0 };
   const imageBase = "https://rtpbp2.bopel.space/images/";
   const normalize = value => value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   const escapeHTML = value => String(value).replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"})[char]);
@@ -62,7 +62,7 @@
   }
 
   function resetAll() {
-    Object.assign(state, {provider:"all", query:"", sort:"featured", limit:15});
+    Object.assign(state, {provider:"all", query:"", sort:"featured", limit:30});
     els.search.value = ""; els.sort.value = "featured"; renderProviders(); renderGames();
   }
 
@@ -109,10 +109,10 @@
     button.addEventListener("click",()=>{const active=button.getAttribute("aria-pressed")!=="true";button.setAttribute("aria-pressed",String(active));button.textContent=active?"🔈":"🔊";button.setAttribute("aria-label",active?"Matikan suara notifikasi":"Aktifkan suara notifikasi")});
   }
 
-  els.providers.addEventListener("click", e => { const btn=e.target.closest("[data-provider]"); if(!btn)return; state.provider=btn.dataset.provider; state.limit=15; renderProviders(); renderGames(); $("#games").scrollIntoView({behavior:"smooth",block:"start"}); });
-  els.search.addEventListener("input", e => { state.query=e.target.value; state.limit=15; renderGames(); });
-  els.sort.addEventListener("change", e => { state.sort=e.target.value; state.limit=15; renderGames(); });
-  els.load.addEventListener("click",()=>{state.limit+=15;renderGames()}); els.reset.addEventListener("click",resetAll); els.emptyReset.addEventListener("click",resetAll);
+  els.providers.addEventListener("click", e => { const btn=e.target.closest("[data-provider]"); if(!btn)return; state.provider=btn.dataset.provider; state.limit=30; renderProviders(); renderGames(); $("#games").scrollIntoView({behavior:"smooth",block:"start"}); });
+  els.search.addEventListener("input", e => { state.query=e.target.value; state.limit=30; renderGames(); });
+  els.sort.addEventListener("change", e => { state.sort=e.target.value; state.limit=30; renderGames(); });
+  els.load.addEventListener("click",()=>{state.limit+=30;renderGames()}); els.reset.addEventListener("click",resetAll); els.emptyReset.addEventListener("click",resetAll);
   els.grid.addEventListener("click",e=>{const btn=e.target.closest("[data-open-game]");if(btn)openModal(Number(btn.dataset.openGame))});
   $("#modal-close").addEventListener("click",closeModal); els.modal.addEventListener("click",e=>{if(e.target===els.modal)closeModal()});
   document.addEventListener("keydown",e=>{if(e.key==="/"&&!/input|select|textarea/i.test(document.activeElement.tagName)){e.preventDefault();els.search.focus()}if(e.key==="Escape")closeModal()});
