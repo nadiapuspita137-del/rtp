@@ -152,18 +152,27 @@
   <dialog class="game-modal" id="game-modal">
     <div class="modal-card">
       <button class="modal-close" id="modal-close" type="button" aria-label="Tutup detail game">×</button>
-      <div class="modal-visual"><img id="modal-image" alt=""></div>
-      <div class="modal-content">
-        <p class="eyebrow" id="modal-provider"></p>
-        <h2 id="modal-title"></h2>
+      <div class="modal-top">
+        <div class="modal-visual"><img id="modal-image" alt=""></div>
+        <div class="modal-heading">
+          <h2 id="modal-title"></h2>
+          <p>Provider: <span id="modal-provider"></span></p>
+          <span class="modal-chip">↗ &nbsp; Indikator <strong id="modal-chip-rtp"></strong></span>
+        </div>
+      </div>
+      <div class="modal-rtp-card">
         <div class="modal-rtp"><span>Indikator halaman</span><strong id="modal-rtp"></strong></div>
         <div class="modal-meter"><i id="modal-meter"></i></div>
-        <section class="pattern-box">
-          <h3>Panduan Pola Main</h3>
-          <p>Panduan ini merupakan indikator tampilan dan bukan jaminan hasil.</p>
-          <ol id="modal-pattern"></ol>
-        </section>
-        <div class="modal-actions"><a class="btn btn-gold" href="https://shortq.net/bolapelangi2">Main di BOLAPELANGI2</a><button class="btn btn-ghost" id="modal-done" type="button">Tutup</button></div>
+      </div>
+      <section class="pattern-box">
+        <h3>Panduan Pola Main</h3>
+        <p>Panduan ini merupakan indikator tampilan dan bukan jaminan hasil.</p>
+        <ol id="modal-pattern"></ol>
+        <div class="pattern-note"><strong>Catatan:</strong> Hasil setiap permainan bersifat acak.</div>
+      </section>
+      <div class="modal-actions">
+        <a class="btn btn-gold" href="https://shortq.net/bolapelangi2">▶ MAIN DI BOLAPELANGI2</a>
+        <a class="btn btn-ghost" href="https://shortq.net/bolapelangi2">+ DAFTAR BOLAPELANGI2</a>
       </div>
     </div>
   </dialog>
