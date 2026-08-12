@@ -1,8 +1,8 @@
 # RTP BOLAPELANGI2
 
-Landing page katalog game statis, responsif, dan tanpa build step. Sekarang tersedia juga admin panel opsional berbasis Cloudflare Pages Functions + D1 untuk mengelola katalog.
+Landing page katalog game statis, responsif, dan tanpa backend. Dibangun dengan HTML, CSS, dan JavaScript murni agar cepat serta mudah dipasang di GitHub Pages, Cloudflare Pages, atau Vercel.
 
-## Fitur publik
+## Fitur
 
 - Pencarian nama game dan provider
 - Filter provider berbentuk carousel
@@ -14,40 +14,22 @@ Landing page katalog game statis, responsif, dan tanpa build step. Sekarang ters
 - Navigasi khusus mobile
 - Informasi 18+ dan penjelasan bahwa indikator bukan jaminan hasil
 
-## Admin panel
-
-Buka `/admin/` setelah deployment untuk:
-
-- Melihat statistik katalog
-- Menambah, mengedit, menghapus game
-- Mengubah persentase RTP
-- Mengatur provider
-- Mengatur gambar, status aktif, status pilihan/hot, dan urutan game
-- Menambah, mengedit, menghapus provider
-- Mengatur Access URL dan waktu pembaruan
-
 ## Menjalankan secara lokal
 
-Tidak perlu proses build untuk frontend. Jalankan server statis dari folder proyek, misalnya:
+Tidak perlu proses build. Jalankan server statis dari folder proyek, misalnya:
 
 ```bash
 npx serve .
 ```
 
-Untuk fitur admin persisten, gunakan Cloudflare Pages Functions dan D1.
+Lalu buka alamat lokal yang ditampilkan.
 
-## Deploy Cloudflare
+## Deploy
 
-1. Buat database Cloudflare D1.
-2. Bind database ke Pages project dengan nama `DB`.
-3. Set secret `ADMIN_PASSWORD`.
-4. Set secret `SESSION_SECRET` dengan nilai acak yang panjang.
-5. Deploy project.
+Untuk Cloudflare Pages gunakan konfigurasi berikut:
 
-Endpoint `/api/data` akan membuat schema dan melakukan seed dari `data.js` ketika tabel game masih kosong.
+- Framework preset: `None`
+- Build command: kosong
+- Output directory: `/`
 
-Salin `wrangler.example.toml` ke konfigurasi Cloudflare milikmu dan isi ID database yang benar. Jangan commit secret asli.
-
-## Struktur data
-
-Frontend mempertahankan fallback ke `data.js`, sehingga katalog tetap dapat ditampilkan sebelum backend D1 dikonfigurasi. Setelah D1 aktif, perubahan melalui admin panel dibaca oleh website melalui `/api/data`.
+Semua data katalog berada di `data.js`. Tampilan berada di `styles.css`, sedangkan interaksi berada di `app.js`.
