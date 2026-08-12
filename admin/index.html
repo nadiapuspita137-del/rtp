@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Admin Panel — RTP BOLAPELANGI2</title>
+  <link rel="stylesheet" href="admin.css?v=1">
+</head>
+<body>
+  <div id="login-view" class="login-page">
+    <div class="login-card">
+      <div class="brand-mark">BP2</div>
+      <p class="eyebrow">ADMIN PANEL</p>
+      <h1>Kelola Katalog</h1>
+      <p class="muted">Masuk untuk mengatur game, provider, RTP, dan konfigurasi situs.</p>
+      <form id="login-form">
+        <label>Password Admin<input id="login-password" type="password" autocomplete="current-password" required></label>
+        <button class="primary" type="submit">Masuk ke Dashboard</button>
+        <p id="login-error" class="error" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="app-view" hidden>
+    <header class="topbar">
+      <div><strong>RTP ADMIN</strong><span>Control Center</span></div>
+      <button id="logout" class="ghost">Keluar</button>
+    </header>
+    <div class="layout">
+      <aside class="sidebar">
+        <button class="nav-item active" data-page="dashboard">Dashboard</button>
+        <button class="nav-item" data-page="games">Game</button>
+        <button class="nav-item" data-page="providers">Provider</button>
+        <button class="nav-item" data-page="settings">Pengaturan</button>
+      </aside>
+      <main class="content">
+        <section class="page active" id="page-dashboard">
+          <div class="page-head"><div><p class="eyebrow">OVERVIEW</p><h1>Dashboard</h1><p class="muted">Ringkasan katalog yang sedang aktif.</p></div></div>
+          <div class="stats"><article><span>Total Game</span><strong id="stat-games">0</strong></article><article><span>Provider</span><strong id="stat-providers">0</strong></article><article><span>Game Aktif</span><strong id="stat-active">0</strong></article><article><span>Game Pilihan</span><strong id="stat-hot">0</strong></article></div>
+          <div class="panel"><div class="panel-head"><div><h2>Aktivitas Cepat</h2><p class="muted">Perubahan disimpan langsung ke database.</p></div><button class="primary" id="quick-add">+ Tambah Game</button></div><div class="notice"><strong>Catatan keamanan</strong><p>Password admin disimpan sebagai secret di Cloudflare, bukan di kode browser. Jangan pernah menaruh token API di JavaScript frontend.</p></div></div>
+        </section>
+
+        <section class="page" id="page-games">
+          <div class="page-head"><div><p class="eyebrow">CATALOG</p><h1>Kelola Game</h1><p class="muted">Tambah, edit, nonaktifkan, atau hapus game.</p></div><button class="primary" id="add-game">+ Tambah Game</button></div>
+          <div class="toolbar"><input id="game-search" type="search" placeholder="Cari game atau provider..."><select id="game-provider-filter"><option value="">Semua provider</option></select></div>
+          <div class="panel table-wrap"><table><thead><tr><th>Game</th><th>Provider</th><th>RTP</th><th>Status</th><th>Hot</th><th>Aksi</th></tr></thead><tbody id="games-body"></tbody></table></div>
+        </section>
+
+        <section class="page" id="page-providers">
+          <div class="page-head"><div><p class="eyebrow">PROVIDERS</p><h1>Kelola Provider</h1><p class="muted">Provider yang aktif akan muncul di filter publik.</p></div><button class="primary" id="add-provider">+ Tambah Provider</button></div>
+          <div class="panel table-wrap"><table><thead><tr><th>Nama</th><th>ID</th><th>Logo</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="providers-body"></tbody></table></div>
+        </section>
+
+        <section class="page" id="page-settings">
+          <div class="page-head"><div><p class="eyebrow">CONFIGURATION</p><h1>Pengaturan</h1><p class="muted">Konfigurasi umum yang disimpan di database.</p></div></div>
+          <form class="panel form-grid" id="settings-form">
+            <label>Access URL<input id="setting-accessUrl" type="url" placeholder="https://..."></label>
+            <label>Terakhir diperbarui<input id="setting-sourceUpdatedAt" type="text" placeholder="2026-08-12T00:00:00Z"></label>
+            <div><button class="primary" type="submit">Simpan Pengaturan</button></div>
+            <p id="settings-status" class="success" hidden>Pengaturan tersimpan.</p>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="game-dialog"><form method="dialog" class="dialog-card" id="game-form">
+    <div class="dialog-head"><div><p class="eyebrow">GAME</p><h2 id="game-dialog-title">Tambah Game</h2></div><button class="icon-button" value="cancel" type="submit">×</button></div>
+    <input id="game-id" type="hidden">
+    <div class="form-grid"><label>Nama Game<input id="game-name" required></label><label>Provider<select id="game-provider" required></select></label><label>RTP (%)<input id="game-rtp" type="number" min="0" max="100" step="0.1" required></label><label>Urutan<input id="game-order" type="number" min="0" step="1" value="0"></label><label class="full">URL / nama file gambar<input id="game-image" placeholder="https://.../image.webp atau nama-file.webp"></label><label class="check"><input id="game-hot" type="checkbox"> Tandai sebagai Pilihan</label><label class="check"><input id="game-active" type="checkbox" checked> Aktif di website</label></div>
+    <div class="dialog-actions"><button class="ghost" value="cancel">Batal</button><button class="primary" id="save-game" value="default">Simpan Game</button></div>
+  </form></dialog>
+
+  <dialog id="provider-dialog"><form method="dialog" class="dialog-card" id="provider-form">
+    <div class="dialog-head"><div><p class="eyebrow">PROVIDER</p><h2 id="provider-dialog-title">Tambah Provider</h2></div><button class="icon-button" value="cancel">×</button></div>
+    <input id="provider-old-id" type="hidden">
+    <div class="form-grid"><label>ID Provider<input id="provider-id" required placeholder="Pragmatic-Play"></label><label>Nama Provider<input id="provider-name" required></label><label>Logo<input id="provider-logo" placeholder="pra.webp"></label><label>Ikon<input id="provider-icon" placeholder="▦"></label><label>Urutan<input id="provider-order" type="number" min="0" value="0"></label><label class="check"><input id="provider-active" type="checkbox" checked> Aktif</label></div>
+    <div class="dialog-actions"><button class="ghost" value="cancel">Batal</button><button class="primary" id="save-provider" value="default">Simpan Provider</button></div>
+  </form></dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="admin.js?v=1"></script>
+</body>
+</html>
