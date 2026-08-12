@@ -61,7 +61,7 @@ Cloudflare Pages Functions berjalan dari folder `/functions`. Pages Functions me
 7. Deploy ulang Pages project.
 8. Buka `/admin/`, login, lalu kelola katalog.
 
-Cloudflare mendokumentasikan bahwa Pages Functions dapat menggunakan D1 melalui binding, dan environment variables/secrets dapat dikonfigurasi dari dashboard. urlCloudflare Pages Functions bindingshttps://developers.cloudflare.com/pages/functions/bindings/
+Cloudflare Pages Functions mendukung D1 melalui binding, dan environment variables/secrets dapat dikonfigurasi dari dashboard Cloudflare.
 
 ## Catatan keamanan
 
